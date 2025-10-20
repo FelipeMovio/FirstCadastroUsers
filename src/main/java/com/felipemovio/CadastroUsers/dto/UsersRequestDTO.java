@@ -9,10 +9,13 @@ public class UsersRequestDTO {
 
     @NotBlank
     private String nome;
-    @NotBlank
+
+    @NotNull
     private Integer idade;
+
     @NotBlank
     private String email;
+
     @NotBlank
     private String senha;
 }
