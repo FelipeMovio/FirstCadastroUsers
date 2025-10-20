@@ -1,4 +1,4 @@
-package com.felipemovio.CadastroUsers.config.security;
+package com.felipemovio.CadastroUsers.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
