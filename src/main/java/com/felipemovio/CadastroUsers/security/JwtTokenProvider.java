@@ -2,7 +2,7 @@ package com.felipemovio.CadastroUsers.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ public class JwtTokenProvider {
     private Long jwtExpiration;
 
     public String generateToken(Authentication authentication) {
-        String username = authentication.name();
+        String username = authentication.getName();
         Date now = new Date();
         Date expiry = new Date(now.getTime() + jwtExpiration);
 
