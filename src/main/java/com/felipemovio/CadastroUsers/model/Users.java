@@ -22,4 +22,9 @@ public class Users {
     private Integer idade;
     private String email;
     private String senha;
+
+    @Column(nullable = false)
+    private String role = "ROLE_USER";  // ou "ROLE_ADMIN"
+    //o campo role para distinguir usuários comuns de admins
+
 }
