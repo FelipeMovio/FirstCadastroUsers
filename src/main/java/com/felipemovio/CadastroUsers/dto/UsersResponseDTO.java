@@ -8,5 +8,4 @@ public class UsersResponseDTO {
     private String nome;
     private Integer idade;
     private String email;
-    private String senha;
 }

@@ -23,14 +23,23 @@ public class AuthService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     public void register(UsersRequestDTO dto) {
-        Users user = new Users();
-        user.setEmail(dto.getEmail());
-        user.setNome(dto.getNome());
-        user.setIdade(dto.getIdade());
-        user.setSenha(passwordEncoder.encode(dto.getSenha()));
-        user.setRole("ROLE_USER");
+        if (usersRepository.existsByEmail(dto.getEmail())) {
+            throw new IllegalArgumentException("Email já está em uso.");
+        }
+
+        Users user = new Users(
+                null, // ID será gerado automaticamente
+                dto.getNome(),
+                dto.getIdade(),
+                dto.getEmail(),
+                passwordEncoder.encode(dto.getSenha()),
+                "ROLE_USER"
+        );
+
         usersRepository.save(user);
     }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

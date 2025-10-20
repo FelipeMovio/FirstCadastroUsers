@@ -20,6 +20,8 @@ public class Users {
 
     private String nome;
     private Integer idade;
+
+    @Column(name = "email", unique = true)
     private String email;
     private String senha;
 
