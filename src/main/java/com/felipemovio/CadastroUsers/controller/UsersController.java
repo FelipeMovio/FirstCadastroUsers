@@ -24,12 +24,6 @@ public class UsersController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    // criar usuario
-    @PostMapping
-    public ResponseEntity<UsersResponseDTO> criarUser(@RequestBody @Valid UsersRequestDTO dto){
-        return ResponseEntity.ok(userService.createUser(dto));
-    }
-
     // ver um usuario
     @GetMapping("/{id}")
     public ResponseEntity<UsersResponseDTO> verUm(@PathVariable Long id){
