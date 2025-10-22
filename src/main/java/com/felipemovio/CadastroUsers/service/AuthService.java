@@ -5,6 +5,7 @@ import com.felipemovio.CadastroUsers.model.Users;
 import com.felipemovio.CadastroUsers.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AuthService implements UserDetailsService {
+public class AuthService {
 
     @Autowired
     private UsersRepository usersRepository;
@@ -23,33 +24,16 @@ public class AuthService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     public void register(RegisterRequestDTO dto) {
-        if (usersRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("Email já está em uso.");
-        }
+        Users newUser = new Users();
+        newUser.setSenha(passwordEncoder.encode(dto.getSenha()));
+        newUser.setEmail(dto.getEmail());
+        newUser.setNome(dto.getNome());
+        newUser.setIdade(dto.getIdade());
 
-        Users user = new Users(
-                null, // ID será gerado automaticamente
-                dto.getNome(),
-                dto.getIdade(),
-                dto.getEmail(),
-                passwordEncoder.encode(dto.getSenha()),
-                "ROLE_USER"
-        );
-
-        usersRepository.save(user);
+        usersRepository.save(newUser);
     }
 
-
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Users user = usersRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getSenha(),
-                List.of(new SimpleGrantedAuthority(user.getRole()))
-        );
-    }
 }
+
+
 

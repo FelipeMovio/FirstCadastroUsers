@@ -3,7 +3,6 @@ package com.felipemovio.CadastroUsers.controller;
 import com.felipemovio.CadastroUsers.dto.request.LoginRequestDTO;
 import com.felipemovio.CadastroUsers.dto.response.LoginResponseDTO;
 import com.felipemovio.CadastroUsers.dto.request.RegisterRequestDTO;
-import com.felipemovio.CadastroUsers.security.JwtTokenProvider;
 import com.felipemovio.CadastroUsers.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +24,6 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterRequestDTO dto) {
@@ -40,10 +34,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO login) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(login.getEmail(), login.getSenha()));
-        String token = jwtTokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return null;
     }
 }
 
