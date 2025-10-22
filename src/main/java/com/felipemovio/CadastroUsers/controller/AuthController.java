@@ -2,7 +2,7 @@ package com.felipemovio.CadastroUsers.controller;
 
 import com.felipemovio.CadastroUsers.dto.request.LoginRequestDTO;
 import com.felipemovio.CadastroUsers.dto.response.LoginResponseDTO;
-import com.felipemovio.CadastroUsers.dto.request.UsersRequestDTO;
+import com.felipemovio.CadastroUsers.dto.request.RegisterRequestDTO;
 import com.felipemovio.CadastroUsers.security.JwtTokenProvider;
 import com.felipemovio.CadastroUsers.service.AuthService;
 import jakarta.validation.Valid;
@@ -32,7 +32,7 @@ public class AuthController {
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid UsersRequestDTO dto) {
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterRequestDTO dto) {
         authService.register(dto);
         return ResponseEntity.ok(Collections.singletonMap("message", "Usuário registrado com sucesso!"));
 

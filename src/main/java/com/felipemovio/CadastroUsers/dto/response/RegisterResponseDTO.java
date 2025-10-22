@@ -3,7 +3,7 @@ package com.felipemovio.CadastroUsers.dto.response;
 import lombok.Data;
 
 @Data
-public class UsersResponseDTO {
+public class RegisterResponseDTO {
     private Long id;
     private String nome;
     private Integer idade;

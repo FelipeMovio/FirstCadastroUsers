@@ -1,6 +1,6 @@
 package com.felipemovio.CadastroUsers.service;
 
-import com.felipemovio.CadastroUsers.dto.request.UsersRequestDTO;
+import com.felipemovio.CadastroUsers.dto.request.RegisterRequestDTO;
 import com.felipemovio.CadastroUsers.model.Users;
 import com.felipemovio.CadastroUsers.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class AuthService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void register(UsersRequestDTO dto) {
+    public void register(RegisterRequestDTO dto) {
         if (usersRepository.existsByEmail(dto.getEmail())) {
             throw new IllegalArgumentException("Email já está em uso.");
         }

@@ -1,8 +1,8 @@
 package com.felipemovio.CadastroUsers.service;
 
 
-import com.felipemovio.CadastroUsers.dto.request.UsersRequestDTO;
-import com.felipemovio.CadastroUsers.dto.response.UsersResponseDTO;
+import com.felipemovio.CadastroUsers.dto.request.RegisterRequestDTO;
+import com.felipemovio.CadastroUsers.dto.response.RegisterResponseDTO;
 import com.felipemovio.CadastroUsers.model.Users;
 import com.felipemovio.CadastroUsers.repository.UsersRepository;
 import org.modelmapper.ModelMapper;
@@ -21,21 +21,21 @@ public class UserService {
     @Autowired
     private UsersRepository usersRepository;
 
-    public UsersResponseDTO createUser(UsersRequestDTO userRequestDTO) {
+    public RegisterResponseDTO createUser(RegisterRequestDTO userRequestDTO) {
         Users user = modelMapper.map(userRequestDTO, Users.class);
         Users saved = usersRepository.save(user);
-        return modelMapper.map(saved, UsersResponseDTO.class);
+        return modelMapper.map(saved, RegisterResponseDTO.class);
     }
 
-    public List<UsersResponseDTO> getAllUsers(){
+    public List<RegisterResponseDTO> getAllUsers(){
         return usersRepository.findAll().stream()
-                .map(user -> modelMapper.map(user, UsersResponseDTO.class))
+                .map(user -> modelMapper.map(user, RegisterResponseDTO.class))
                 .collect(Collectors.toList());
     }
 
-    public UsersResponseDTO getUserById(Long id){
+    public RegisterResponseDTO getUserById(Long id){
         Users user = usersRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario nao encontrado "));
-        return modelMapper.map(user, UsersResponseDTO.class);
+        return modelMapper.map(user, RegisterResponseDTO.class);
     }
 
     public void deletar(Long id){

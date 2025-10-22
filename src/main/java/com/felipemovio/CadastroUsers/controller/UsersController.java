@@ -1,7 +1,7 @@
 package com.felipemovio.CadastroUsers.controller;
 
 
-import com.felipemovio.CadastroUsers.dto.response.UsersResponseDTO;
+import com.felipemovio.CadastroUsers.dto.response.RegisterResponseDTO;
 import com.felipemovio.CadastroUsers.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ public class UsersController {
 
     // ver todos usuarios
     @GetMapping
-    public ResponseEntity<List<UsersResponseDTO>> verTodos(){
+    public ResponseEntity<List<RegisterResponseDTO>> verTodos(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     // ver um usuario
     @GetMapping("/{id}")
-    public ResponseEntity<UsersResponseDTO> verUm(@PathVariable Long id){
+    public ResponseEntity<RegisterResponseDTO> verUm(@PathVariable Long id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
