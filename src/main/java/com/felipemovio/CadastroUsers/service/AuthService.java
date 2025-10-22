@@ -28,8 +28,11 @@ public class AuthService implements UserDetailsService {
 
 
     public void register(RegisterRequestDTO dto) {
+        String senhaCriptografada = passwordEncoder.encode(dto.getSenha());
+        System.out.println("SENHA CRIPTOGRAFADA: " + senhaCriptografada);
+
         Users newUser = new Users();
-        newUser.setSenha(passwordEncoder.encode(dto.getSenha()));
+        newUser.setSenha(senhaCriptografada);
         newUser.setEmail(dto.getEmail());
         newUser.setNome(dto.getNome());
         newUser.setIdade(dto.getIdade());
