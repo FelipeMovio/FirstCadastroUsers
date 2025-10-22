@@ -1,11 +1,14 @@
 package com.felipemovio.CadastroUsers.service;
 
+import com.felipemovio.CadastroUsers.dto.request.LoginRequestDTO;
 import com.felipemovio.CadastroUsers.dto.request.RegisterRequestDTO;
+import com.felipemovio.CadastroUsers.dto.response.LoginResponseDTO;
 import com.felipemovio.CadastroUsers.model.Users;
 import com.felipemovio.CadastroUsers.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,13 +18,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AuthService {
+public class AuthService implements UserDetailsService {
 
     @Autowired
     private UsersRepository usersRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     public void register(RegisterRequestDTO dto) {
         Users newUser = new Users();
@@ -33,6 +37,11 @@ public class AuthService {
         usersRepository.save(newUser);
     }
 
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return usersRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException(username));
+    }
 }
 
 

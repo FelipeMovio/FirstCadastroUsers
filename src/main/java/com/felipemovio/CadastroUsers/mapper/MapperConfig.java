@@ -1,4 +1,4 @@
-package com.felipemovio.CadastroUsers.config.mapper;
+package com.felipemovio.CadastroUsers.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

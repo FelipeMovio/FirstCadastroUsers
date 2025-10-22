@@ -21,12 +21,6 @@ public class UserService {
     @Autowired
     private UsersRepository usersRepository;
 
-    public RegisterResponseDTO createUser(RegisterRequestDTO userRequestDTO) {
-        Users user = modelMapper.map(userRequestDTO, Users.class);
-        Users saved = usersRepository.save(user);
-        return modelMapper.map(saved, RegisterResponseDTO.class);
-    }
-
     public List<RegisterResponseDTO> getAllUsers(){
         return usersRepository.findAll().stream()
                 .map(user -> modelMapper.map(user, RegisterResponseDTO.class))
