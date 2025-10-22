@@ -1,10 +1,8 @@
 package com.felipemovio.CadastroUsers.controller;
 
 
-import com.felipemovio.CadastroUsers.dto.UsersRequestDTO;
-import com.felipemovio.CadastroUsers.dto.UsersResponseDTO;
+import com.felipemovio.CadastroUsers.dto.response.UsersResponseDTO;
 import com.felipemovio.CadastroUsers.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

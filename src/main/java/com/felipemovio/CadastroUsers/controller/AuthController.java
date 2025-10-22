@@ -1,8 +1,8 @@
 package com.felipemovio.CadastroUsers.controller;
 
-import com.felipemovio.CadastroUsers.dto.LoginRequestDTO;
-import com.felipemovio.CadastroUsers.dto.LoginResponseDTO;
-import com.felipemovio.CadastroUsers.dto.UsersRequestDTO;
+import com.felipemovio.CadastroUsers.dto.request.LoginRequestDTO;
+import com.felipemovio.CadastroUsers.dto.response.LoginResponseDTO;
+import com.felipemovio.CadastroUsers.dto.request.UsersRequestDTO;
 import com.felipemovio.CadastroUsers.security.JwtTokenProvider;
 import com.felipemovio.CadastroUsers.service.AuthService;
 import jakarta.validation.Valid;

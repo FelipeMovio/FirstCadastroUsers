@@ -1,4 +1,4 @@
-package com.felipemovio.CadastroUsers.dto;
+package com.felipemovio.CadastroUsers.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

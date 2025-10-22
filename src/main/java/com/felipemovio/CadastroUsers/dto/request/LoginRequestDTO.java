@@ -1,4 +1,4 @@
-package com.felipemovio.CadastroUsers.dto;
+package com.felipemovio.CadastroUsers.dto.request;
 
 import lombok.Data;
 

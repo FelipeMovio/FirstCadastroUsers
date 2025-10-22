@@ -1,6 +1,6 @@
 package com.felipemovio.CadastroUsers.service;
 
-import com.felipemovio.CadastroUsers.dto.UsersRequestDTO;
+import com.felipemovio.CadastroUsers.dto.request.UsersRequestDTO;
 import com.felipemovio.CadastroUsers.model.Users;
 import com.felipemovio.CadastroUsers.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
