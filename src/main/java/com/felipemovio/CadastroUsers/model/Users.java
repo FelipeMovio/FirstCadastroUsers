@@ -26,8 +26,9 @@ public class Users implements UserDetails {
     private String nome;
     private Integer idade;
 
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
+
     private String senha;
 
 
