@@ -30,12 +30,17 @@ public class AuthService implements UserDetailsService {
     public void register(RegisterRequestDTO dto) {
         String senhaCriptografada = passwordEncoder.encode(dto.getSenha());
         System.out.println("SENHA CRIPTOGRAFADA: " + senhaCriptografada);
+        if (usersRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new RuntimeException("E-mail já cadastrado!");
+        }
+
 
         Users newUser = new Users();
         newUser.setSenha(senhaCriptografada);
         newUser.setEmail(dto.getEmail());
         newUser.setNome(dto.getNome());
         newUser.setIdade(dto.getIdade());
+
 
         usersRepository.save(newUser);
     }
