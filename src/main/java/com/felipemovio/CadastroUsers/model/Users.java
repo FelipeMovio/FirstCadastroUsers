@@ -29,6 +29,9 @@ public class Users implements UserDetails {
 
     private String senha;
 
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
