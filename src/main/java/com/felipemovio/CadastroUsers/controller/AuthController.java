@@ -3,6 +3,7 @@ package com.felipemovio.CadastroUsers.controller;
 import com.felipemovio.CadastroUsers.dto.request.LoginRequestDTO;
 import com.felipemovio.CadastroUsers.dto.response.LoginResponseDTO;
 import com.felipemovio.CadastroUsers.dto.request.RegisterRequestDTO;
+import com.felipemovio.CadastroUsers.dto.response.RegisterResponseDTO;
 import com.felipemovio.CadastroUsers.model.Users;
 import com.felipemovio.CadastroUsers.security.TokenConfig;
 import com.felipemovio.CadastroUsers.service.AuthService;
@@ -12,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
@@ -33,21 +31,24 @@ public class AuthController {
     private TokenConfig tokenConfig;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterRequestDTO dto) {
-        authService.register(dto);
-        return ResponseEntity.ok(Collections.singletonMap("message", "Usuário registrado com sucesso!"));
-
+    public ResponseEntity<RegisterResponseDTO> register(@RequestBody @Valid RegisterRequestDTO dto) {
+        RegisterResponseDTO user = authService.register(dto);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO dto) {
-        UsernamePasswordAuthenticationToken userAndPass = new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getSenha());
-        Authentication authentication = authenticationManager.authenticate(userAndPass);
-
-        Users user = (Users) authentication.getPrincipal();
+        Authentication auth = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getSenha())
+        );
+        Users user = (Users) auth.getPrincipal();
         String token = tokenConfig.generateToken(user);
-
         return ResponseEntity.ok(new LoginResponseDTO(token));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> me(Authentication authentication) {
+        return ResponseEntity.ok(authentication.getPrincipal());
     }
 }
 

@@ -7,6 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Optional;
 
 public interface UsersRepository extends JpaRepository<Users, Long> {
-    Optional<UserDetails> findByEmail(String username);
+    Optional<Users> findByEmail(String email);
 
 }

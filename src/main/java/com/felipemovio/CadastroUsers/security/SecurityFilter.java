@@ -22,20 +22,23 @@ public class SecurityFilter extends OncePerRequestFilter {
     private TokenConfig tokenConfig;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizedHeader = request.getHeader("Authorization");
-        if (Strings.isNotEmpty(authorizedHeader) && authorizedHeader.startsWith("Bearer ")){
-            String token = authorizedHeader.substring("Bearer ".length());
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
+
+        String authHeader = request.getHeader("Authorization");
+
+        if (Strings.isNotEmpty(authHeader) && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
             Optional<JWTUserData> optUser = tokenConfig.validateToken(token);
 
-            if (optUser.isPresent()){
-
+            if (optUser.isPresent()) {
                 JWTUserData userData = optUser.get();
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userData,null,null);
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(userData, null, null);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
-                filterChain.doFilter(request,response);
             }
         }
+
+        chain.doFilter(request, response);
     }
 }

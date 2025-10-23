@@ -13,9 +13,9 @@ import java.time.Instant;
 import java.util.Optional;
 
 @Component
-@ConfigurationProperties(prefix = "jwt")
 public class TokenConfig {
 
+    @Value("${jwt.secret}")
     private String secret;
 
     public String generateToken(Users user) {

@@ -1,8 +1,12 @@
 package com.felipemovio.CadastroUsers.dto.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
+@AllArgsConstructor
 public class RegisterResponseDTO {
     private Long id;
     private String nome;
