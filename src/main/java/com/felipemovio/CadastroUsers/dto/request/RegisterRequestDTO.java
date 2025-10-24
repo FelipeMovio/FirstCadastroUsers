@@ -1,5 +1,6 @@
 package com.felipemovio.CadastroUsers.dto.request;
 
+import com.felipemovio.CadastroUsers.model.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -18,4 +19,6 @@ public class RegisterRequestDTO {
 
     @NotBlank
     private String senha;
+
+    private Role role;
 }
