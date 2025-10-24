@@ -3,10 +3,13 @@ package com.felipemovio.CadastroUsers.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Usuarios")
@@ -29,13 +32,17 @@ public class Users implements UserDetails {
 
     private String senha;
 
+    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
+    private Set<Role> roles = new HashSet<>();
 
 
+
+    // Auterações nas nossas rotas
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.name()))
+                .toList();
     }
 
     @Override
