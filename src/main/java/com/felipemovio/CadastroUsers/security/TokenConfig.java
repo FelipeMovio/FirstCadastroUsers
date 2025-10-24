@@ -23,6 +23,7 @@ public class TokenConfig {
 
         return JWT.create()
                 .withClaim("userId", user.getId())
+                .withClaim("roles", user.getRoles().stream().map(Enum::name).toList())
                 .withSubject(user.getEmail())
                 .withExpiresAt(Instant.now().plusSeconds(86400)) // 24h duração do token
                 .withIssuedAt(Instant.now())
@@ -37,6 +38,7 @@ public class TokenConfig {
             return Optional.of(JWTUserData.builder()
                     .userId(decoded.getClaim("userId").asLong())
                     .email(decoded.getSubject())
+                    .roles(decoded.getClaim("roles").asList(String.class))
                     .build());
         } catch (JWTVerificationException e) {
             return Optional.empty();
