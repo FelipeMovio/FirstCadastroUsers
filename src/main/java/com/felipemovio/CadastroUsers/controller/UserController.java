@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/user")
+public class UserController {
 
-    @GetMapping(value = "/panel")
-    public String adinPanel(){
-        return "so administradores ";
+    @GetMapping("/panel")
+    public String userPanel(){
+        return "Somente usuarios";
     }
 }
