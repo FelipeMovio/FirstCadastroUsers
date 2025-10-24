@@ -10,6 +10,6 @@ public class UserController {
 
     @GetMapping("/panel")
     public String userPanel(){
-        return "Somente usuarios";
+        return "Somente usuarios e administradores";
     }
 }
