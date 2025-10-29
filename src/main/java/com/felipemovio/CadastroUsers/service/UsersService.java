@@ -8,6 +8,7 @@ import com.felipemovio.CadastroUsers.security.JWTUserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,9 @@ public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     // Lista todos os usuários (somente ADMIN)
@@ -39,13 +43,16 @@ public class UsersService {
 
 
     // Atualiza dados do usuário logado
-    public RegisterResponseDTO atualizarUsuarioLogado(String nome, Integer idade) {
+    public RegisterResponseDTO atualizarUsuarioLogado(String nome, Integer idade,String novaSenha) {
         JWTUserData userData = getAuthenticatedUserData();
         Users user = usersRepository.findById(userData.userId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         if (nome != null && !nome.isBlank()) user.setNome(nome);
         if (idade != null) user.setIdade(idade);
+        if (novaSenha != null && !novaSenha.isBlank()) {
+            user.setSenha(passwordEncoder.encode(novaSenha));
+        }
 
         Users updated = usersRepository.save(user);
         return new RegisterResponseDTO(updated.getId(), updated.getNome(), updated.getIdade(), updated.getEmail());
