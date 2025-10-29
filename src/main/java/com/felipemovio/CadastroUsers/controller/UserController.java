@@ -1,7 +1,9 @@
 package com.felipemovio.CadastroUsers.controller;
 
 import com.felipemovio.CadastroUsers.dto.request.RegisterRequestDTO;
+import com.felipemovio.CadastroUsers.dto.request.UpdateUserRequestDTO;
 import com.felipemovio.CadastroUsers.dto.response.RegisterResponseDTO;
+import com.felipemovio.CadastroUsers.security.JWTUserData;
 import com.felipemovio.CadastroUsers.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getUsuarioLogado());
     }
 
-    public RegisterResponseDTO atualizarUsuarioLogado(
-            @RequestParam(required = false) String nome,
-            @RequestParam(required = false) Integer idade,
-            @RequestParam(required = false) String novaSenha
+    @PutMapping("/me")
+    public RegisterResponseDTO updateCurrentUser(
+            @RequestBody UpdateUserRequestDTO dto
     ) {
-        return userService.atualizarUsuarioLogado(nome, idade, novaSenha);
+        return userService.atualizarUsuarioLogado( dto.getNome(), dto.getIdade(), dto.getNovaSenha());
     }
 }
