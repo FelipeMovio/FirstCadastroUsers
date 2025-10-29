@@ -61,7 +61,9 @@ public class UsersService {
     // Deletar usuário logado
     public void deletarUsuarioLogado() {
         JWTUserData userData = getAuthenticatedUserData();
-        usersRepository.deleteById(userData.userId());
+        Users user = usersRepository.findById(userData.userId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        usersRepository.delete(user);
     }
 
     // Recupera dados do usuário autenticado via JWT
