@@ -17,7 +17,7 @@ public class UserController {
     private UsersService userService;
 
     @GetMapping("/me")
-    public ResponseEntity<RegisterResponseDTO> verProptioUsuario() {
+    public ResponseEntity<RegisterResponseDTO> verProprioUsuario() {
         return ResponseEntity.ok(userService.getUsuarioLogado());
     }
 }
