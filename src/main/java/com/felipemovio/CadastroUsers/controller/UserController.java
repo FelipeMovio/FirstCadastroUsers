@@ -23,9 +23,9 @@ public class UserController {
     }
 
     @PutMapping("/me")
-    public RegisterResponseDTO updateCurrentUser(
+    public ResponseEntity<RegisterResponseDTO> updateCurrentUser(
             @RequestBody UpdateUserRequestDTO dto
     ) {
-        return userService.atualizarUsuarioLogado( dto.getNome(), dto.getIdade(), dto.getNovaSenha());
+        return ResponseEntity.ok(userService.atualizarUsuarioLogado( dto.getNome(), dto.getIdade(), dto.getNovaSenha()));
     }
 }
