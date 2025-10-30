@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @DeleteMapping("/me")
-    public void deletarUser(){
+    public ResponseEntity<Void> deletarUsuarioLogado() {
         userService.deletarUsuarioLogado();
-
+        return ResponseEntity.noContent().build(); // HTTP 204 - sucesso sem corpo
     }
 }
