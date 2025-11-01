@@ -43,7 +43,8 @@ public class AuthController {
         );
         Users user = (Users) auth.getPrincipal();
         String token = tokenConfig.generateToken(user);
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        RegisterResponseDTO userDTO = new RegisterResponseDTO(user.getId(), user.getNome(), user.getIdade(), user.getEmail());
+        return ResponseEntity.ok(new LoginResponseDTO(token, userDTO));
     }
 
 }

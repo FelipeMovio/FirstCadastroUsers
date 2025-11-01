@@ -1,8 +1,11 @@
 package com.felipemovio.CadastroUsers.dto.response;
 
+import com.felipemovio.CadastroUsers.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.Set;
 
 @Data
 @Builder
@@ -12,4 +15,5 @@ public class RegisterResponseDTO {
     private String nome;
     private Integer idade;
     private String email;
+
 }
