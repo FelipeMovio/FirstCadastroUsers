@@ -1,7 +1,6 @@
-package com.felipemovio.CadastroUsers.controller;
+package com.felipemovio.CadastroUsers.controller.admin;
 
 import com.felipemovio.CadastroUsers.dto.response.RegisterResponseDTO;
-import com.felipemovio.CadastroUsers.model.Users;
 import com.felipemovio.CadastroUsers.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
