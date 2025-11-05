@@ -4,9 +4,7 @@ import com.felipemovio.CadastroUsers.model.Product;
 import com.felipemovio.CadastroUsers.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,12 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<Product>> verTodos(){
         List<Product> product = productService.verProdutos();
+        return ResponseEntity.ok(product);
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> criar(@RequestBody Product product){
+        Product product1 = productService.criarProduto(product);
         return ResponseEntity.ok(product);
     }
 }
