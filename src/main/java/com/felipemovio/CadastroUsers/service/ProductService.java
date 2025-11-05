@@ -18,6 +18,10 @@ public class ProductService {
     // ver itens listas
     public List<Product> verProdutos(){
         return repository.findAll();
+    }
 
+    // criar item
+    public Product criarProduto(Product product){
+        return repository.save(product);
     }
 }
