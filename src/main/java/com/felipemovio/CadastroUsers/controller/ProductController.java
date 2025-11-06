@@ -21,4 +21,6 @@ public class ProductController {
         List<Product> product = productService.verProdutos();
         return ResponseEntity.ok(product);
     }
+
+
 }

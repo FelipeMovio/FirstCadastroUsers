@@ -26,7 +26,7 @@ public class AdminController {
         return ResponseEntity.ok(users);
     }
 
-    @PostMapping("/product")
+    @PostMapping("/create/product")
     public ResponseEntity<Product> criar(@RequestBody Product product){
         Product product1 = productService.criarProduto(product);
         return ResponseEntity.ok(product);
