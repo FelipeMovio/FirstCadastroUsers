@@ -24,4 +24,14 @@ public class ProductService {
     public Product criarProduto(Product product){
         return repository.save(product);
     }
+
+    // deletar item
+    public void deletarPorIdProduto(Integer id){
+        try {
+            Product product = repository.findById(id).get();
+            repository.delete(product);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
