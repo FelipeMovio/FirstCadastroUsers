@@ -22,5 +22,9 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-
+    @DeleteMapping
+    public ResponseEntity<Void> deletar(@PathVariable Integer id ){
+        productService.deletarPorIdProduto(id);
+        return ResponseEntity.ok().build();
+    }
 }
