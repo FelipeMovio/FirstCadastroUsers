@@ -36,4 +36,14 @@ public class ProductService {
     }
 
     // atualizar item
+    public Product atulizarProduto(Integer id,String name, Double price, Integer quantity){
+        Product product = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto nao encontrado "));
+        if (name != null && !name.isBlank()) product.setName(name);
+        if (price != null) product.setPrice(price);
+        if (quantity != null) product.setQuantity(quantity);
+
+        Product productSave = repository.save(product);
+        return new Product(productSave.getId(),productSave.getName(), productSave.getPrice(), productSave.getQuantity());
+    }
 }
