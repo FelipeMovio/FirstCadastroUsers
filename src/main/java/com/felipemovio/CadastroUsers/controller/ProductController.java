@@ -28,9 +28,5 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<Product> atualizar(@RequestBody Product product){
-        return ResponseEntity.ok(productService.atulizarProduto(product.getId(),product.getName(),product.getPrice(),product.getQuantity()));
-    }
 
 }

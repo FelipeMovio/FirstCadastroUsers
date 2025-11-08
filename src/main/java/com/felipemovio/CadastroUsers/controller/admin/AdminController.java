@@ -31,4 +31,9 @@ public class AdminController {
         Product product1 = productService.criarProduto(product);
         return ResponseEntity.ok(product);
     }
+
+    @PutMapping("/edit/product")
+    public ResponseEntity<Product> atualizar(@RequestBody Product product){
+        return ResponseEntity.ok(productService.atulizarProduto(product.getId(),product.getName(),product.getPrice(),product.getQuantity()));
+    }
 }
