@@ -29,7 +29,7 @@ public class AdminController {
     @PostMapping("/create/product")
     public ResponseEntity<Product> criar(@RequestBody Product product){
         Product product1 = productService.criarProduto(product);
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok(product1);
     }
 
     @PutMapping("/edit/product")
