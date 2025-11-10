@@ -28,7 +28,8 @@ public class ProductService {
     // deletar item
     public void deletarPorIdProduto(Integer id){
         try {
-            Product product = repository.findById(id).get();
+            Product product = repository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
             repository.delete(product);
         } catch (Exception e) {
             throw new RuntimeException(e);
